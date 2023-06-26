@@ -13,7 +13,7 @@ export const validateEmail = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: EMAIL_SERVICE_PROVIDER,
       port: 465,
-      secure: false,
+      secure: true,
       debug: true,
       auth: {
         user: SENDER_EMAIL,
@@ -28,6 +28,8 @@ export const validateEmail = async (req, res) => {
       subject: "OTP for Login",
       html: `<p>Your OTP: 237672</p>`,
     };
+
+    console.log(EMAIL_SERVICE_PROVIDER,SENDER_EMAIL,EMAIL_PASSWORD, mailOptions);
 
     // Send the email
     const info = await transporter.sendMail(mailOptions);
